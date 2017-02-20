@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/dialog_show_courses_average_mark_horizontal_margin"
+    android:layout_marginEnd="@dimen/dialog_horizontal_margin"
+    android:layout_marginBottom="@dimen/dialog_vertical_margin"
+    android:layout_marginTop="@dimen/dialog_vertical_margin">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_filters"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginTop="@dimen/dialog_vertical_margin"
+        android:layout_marginStart="@dimen/dialog_horizontal_margin"
+        android:layout_marginBottom="@dimen/dialog_vertical_margin"/>
+
+    <Spinner
+        android:id="@+id/spinnerFiltersCourse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dialog_vertical_margin"
+        android:layout_marginStart="@dimen/dialog_horizontal_margin"
+        android:layout_marginEnd="@dimen/dialog_vertical_margin" />
+
+    <EditText
+        android:id="@+id/etFiltersMark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dialog_vertical_margin"
+        android:layout_marginBottom="@dimen/dialog_vertical_margin"
+        android:layout_marginStart="@dimen/dialog_vertical_margin"
+        android:layout_marginEnd="@dimen/dialog_vertical_margin"
+        android:hint="@string/hint_mark"
+        android:inputType="number"
+        android:maxLength="1"
+        android:textColorLink="?attr/colorPrimary" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnFilterOk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_ok"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"/>
+
+        <Button
+            android:id="@+id/btnFilterClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_clear"
+            android:layout_toStartOf="@id/btnFilterOk"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white" />
+
+    </RelativeLayout>
+
+</LinearLayout>

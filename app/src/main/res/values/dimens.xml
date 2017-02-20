@@ -1,0 +1,19 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="item_student_icon_left_margin">24dp</dimen>
+    <dimen name="item_student_icon_right_margin">16dp</dimen>
+    <dimen name="item_student_info_icon_margin">16dp</dimen>
+    <dimen name="item_student_vertical_padding">16dp</dimen>
+    <dimen name="item_student_vertical_margin">5dp</dimen>
+
+    <dimen name="item_course_mark_horizontal_padding">30dp</dimen>
+    <dimen name="item_course_mark_vertical_padding">10dp</dimen>
+
+    <dimen name="dialog_horizontal_margin">10dp</dimen>
+    <dimen name="dialog_vertical_margin">15dp</dimen>
+
+    <dimen name="dialog_show_courses_average_mark_horizontal_margin">10dp</dimen>
+</resources>

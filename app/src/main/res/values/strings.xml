@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">TestTask</string>
+
+    <string name="action_filter">Filter</string>
+
+    <string name="button_ok">OK</string>
+    <string name="button_clear">CLEAR</string>
+
+    <string name="title_courses">Courses</string>
+    <string name="title_filters">Filters</string>
+
+    <string name="text_average_mark">Average mark:</string>
+    <string name="hint_mark">Mark</string>
+
+    <string name="description_icon">Icon</string>
+    <string name="description_info">Info</string>
+
+    <string name="message_error_load_data">Can not load data</string>
+    <string name="message_no_elements">No elements</string>
+</resources>

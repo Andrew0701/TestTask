@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/containerItemStudent"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/item_student_vertical_margin"
+    android:layout_marginBottom="@dimen/item_student_vertical_margin"
+    android:paddingTop="@dimen/item_student_vertical_padding"
+    android:paddingBottom="@dimen/item_student_vertical_padding"
+    android:background="@color/colorGray">
+
+    <ImageView
+        android:id="@+id/ivStudentIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/description_icon"
+        android:paddingStart="@dimen/item_student_icon_left_margin"
+        android:paddingEnd="@dimen/item_student_icon_right_margin"
+        android:layout_centerVertical="true"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/ivStudentIcon">
+
+        <TextView
+            android:id="@+id/tvStudentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ivan-0 Petrov-0"
+            android:textStyle="normal|bold" />
+
+        <TextView
+            android:id="@+id/tvStudentBirthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="13.02.1988"/>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btnStudentInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/description_info"
+        android:background="@android:drawable/ic_menu_info_details"
+        android:layout_marginEnd="@dimen/item_student_info_icon_margin"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

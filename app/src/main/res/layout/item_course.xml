@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/item_student_vertical_margin"
+    android:layout_marginBottom="@dimen/item_student_vertical_margin"
+    android:paddingTop="@dimen/item_student_vertical_padding"
+    android:paddingBottom="@dimen/item_student_vertical_padding"
+    android:background="@color/colorGray">
+
+    <TextView
+        android:id="@+id/tvCourseName"
+        android:text="Course-0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/item_student_icon_left_margin"
+        android:paddingEnd="@dimen/item_student_icon_right_margin"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/tvCourseMark"
+        android:text="5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_mark"
+        android:layout_marginEnd="@dimen/item_student_info_icon_margin"
+        android:paddingStart="@dimen/item_course_mark_horizontal_padding"
+        android:paddingEnd="@dimen/item_course_mark_horizontal_padding"
+        android:paddingTop="@dimen/item_course_mark_vertical_padding"
+        android:paddingBottom="@dimen/item_course_mark_vertical_padding"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+</RelativeLayout>
