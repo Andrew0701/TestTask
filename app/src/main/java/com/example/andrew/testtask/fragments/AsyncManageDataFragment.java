@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.example.andrew.testtask.data.DatabaseHelper;
+import com.example.andrew.testtask.models.Course;
 import com.example.andrew.testtask.models.Student;
 
 import java.util.ArrayList;
@@ -24,6 +25,9 @@ public class AsyncManageDataFragment extends Fragment {
 
     private GetDataFromDbAsyncTask mGetDataFromDbAsyncTask;
     boolean isGettingDataFromDbTaskExecuting = false;
+
+    private GetAllCoursesNamesAsyncTask mGetAllCoursesNamesAsyncTask;
+    boolean isGettingAllCoursesNamesTaskExecuting = false;
 
     public AsyncManageDataFragment() {
     }
@@ -50,31 +54,46 @@ public class AsyncManageDataFragment extends Fragment {
 
     public void startInsertionTask(Context context, List<Student> students) {
         if (!isInsertTaskExecuting) {
+            isInsertTaskExecuting = true;
             mInsertIntoDbAsyncTask = new InsertIntoDbAsyncTask(context);
             mInsertIntoDbAsyncTask.execute(students);
-            isInsertTaskExecuting = true;
         }
     }
 
     public void cancelInsertionTask() {
         if (isInsertTaskExecuting) {
-            mInsertIntoDbAsyncTask.cancel(true);
             isInsertTaskExecuting = false;
+            mInsertIntoDbAsyncTask.cancel(true);
         }
     }
 
     public void startGettingDataTask(Context context, Object... obj) {
         if (!isGettingDataFromDbTaskExecuting) {
+            isGettingDataFromDbTaskExecuting = true;
             mGetDataFromDbAsyncTask = new GetDataFromDbAsyncTask(context);
             mGetDataFromDbAsyncTask.execute(obj);
-            isGettingDataFromDbTaskExecuting = true;
         }
     }
 
     public void cancelGettingDataTask() {
         if (isGettingDataFromDbTaskExecuting) {
-            mGetDataFromDbAsyncTask.cancel(true);
             isGettingDataFromDbTaskExecuting = false;
+            mGetDataFromDbAsyncTask.cancel(true);
+        }
+    }
+
+    public void startGettingCoursesNamesTask(Context context) {
+        if (!isGettingAllCoursesNamesTaskExecuting) {
+            isGettingAllCoursesNamesTaskExecuting = true;
+            mGetAllCoursesNamesAsyncTask = new GetAllCoursesNamesAsyncTask(context);
+            mGetAllCoursesNamesAsyncTask.execute();
+        }
+    }
+
+    public void cancelGettingCoursesNamesTask() {
+        if (isGettingAllCoursesNamesTaskExecuting) {
+            isGettingAllCoursesNamesTaskExecuting = false;
+            mGetAllCoursesNamesAsyncTask.cancel(true);
         }
     }
 
@@ -82,6 +101,7 @@ public class AsyncManageDataFragment extends Fragment {
         void onDataStartSave();
         void onDataSaved();
         void onDataLoadFinish(List<Student> students);
+        void onCoursesNamesLoadFinish(List<String> coursesNames);
     }
 
     private class InsertIntoDbAsyncTask extends AsyncTask<List<Student>, Void, Void> {
@@ -143,6 +163,30 @@ public class AsyncManageDataFragment extends Fragment {
             isGettingDataFromDbTaskExecuting = false;
             if (mStatusListener != null) {
                 mStatusListener.onDataLoadFinish(students);
+            }
+        }
+    }
+
+    private class GetAllCoursesNamesAsyncTask extends AsyncTask<Void, Void, List<String>> {
+        private Context mContext;
+        private DatabaseHelper mDatabaseHelper;
+
+        public GetAllCoursesNamesAsyncTask(Context context) {
+            mContext = context;
+            mDatabaseHelper = new DatabaseHelper(mContext);
+        }
+
+        @Override
+        protected List<String> doInBackground(Void... params) {
+            List<String> coursesNames = mDatabaseHelper.getAllCourseNames();
+            return coursesNames;
+        }
+
+        @Override
+        protected void onPostExecute(List<String> coursesNames) {
+            isGettingAllCoursesNamesTaskExecuting = false;
+            if (mStatusListener != null) {
+                mStatusListener.onCoursesNamesLoadFinish(coursesNames);
             }
         }
     }

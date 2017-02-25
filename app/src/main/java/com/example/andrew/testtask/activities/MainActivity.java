@@ -49,15 +49,14 @@ public class MainActivity extends AppCompatActivity implements AsyncManageDataFr
     private StudentAdapter mStudentAdapter;
     private EndlessRecyclerOnScrollListener mEndlessOnScrollListener;
 
+    private ArrayAdapter<String> mCoursesAdapter;
     private SlidingPaneLayout mFilterSlidingPaneLayout;
-
-    private DatabaseHelper mDatabaseHelper = new DatabaseHelper(this);
 
     private AsyncManageDataFragment mManageDataFragment;
 
     private static final int mRecordsPerPage = 20;
 
-    private boolean mIsFiltered = false;
+    private boolean mIsFiltered;
     private String mFilterCourseName;
     private int mFilterMark;
 
@@ -69,8 +68,8 @@ public class MainActivity extends AppCompatActivity implements AsyncManageDataFr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initFields();
         initAsyncManageDataFragment();
+        initFields();
         if (savedInstanceState == null) {
             showLoadingAnimation();
             downloadData();
@@ -120,15 +119,15 @@ public class MainActivity extends AppCompatActivity implements AsyncManageDataFr
     }
 
     private void initFilterSlidePanelLayout() {
-        mFilterSlidingPaneLayout = (SlidingPaneLayout) findViewById(R.id.splFilter);
+        mManageDataFragment.startGettingCoursesNamesTask(this);
 
-        final List<String> courses = mDatabaseHelper.getAllCourseNames();
-        ArrayAdapter<String> coursesAdapter =
-                new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, courses);
-        coursesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayList<String> initialEmptyList = new ArrayList<>();
+        mCoursesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, initialEmptyList);
+        mCoursesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         final Spinner coursesSpinner = (Spinner) findViewById(R.id.spinnerFiltersCourse);
-        coursesSpinner.setAdapter(coursesAdapter);
+        coursesSpinner.setAdapter(mCoursesAdapter);
 
+        mFilterSlidingPaneLayout = (SlidingPaneLayout) findViewById(R.id.splFilter);
         final EditText markEditText = (EditText) findViewById(R.id.etFiltersMark);
 
         findViewById(R.id.btnFilterOk).setOnClickListener(new View.OnClickListener() {
@@ -304,8 +303,7 @@ public class MainActivity extends AppCompatActivity implements AsyncManageDataFr
                 .setTitle(R.string.title_courses)
                 .setView(dialogView)
                 .show();
-        ((Button) dialogView.findViewById(R.id.btnShowCoursesOk))
-                .setOnClickListener(new View.OnClickListener() {
+        dialogView.findViewById(R.id.btnShowCoursesOk).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
@@ -350,5 +348,11 @@ public class MainActivity extends AppCompatActivity implements AsyncManageDataFr
     public void onDataLoadFinish(List<Student> students) {
         updateShowingStudents(students);
         hideLoadingAnimation();
+    }
+
+    @Override
+    public void onCoursesNamesLoadFinish(List<String> coursesNames) {
+        mCoursesAdapter.addAll(coursesNames);
+        mCoursesAdapter.notifyDataSetChanged();
     }
 }
